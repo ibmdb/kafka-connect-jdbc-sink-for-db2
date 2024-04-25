@@ -26,6 +26,6 @@ import org.apache.kafka.connect.sink.SinkRecord;
 public interface IDatabaseWriter {
 
     // TODO: handle upserting / idempotency to prevent insertion of duplicate records
-    void insert(final String tableName, final Collection<SinkRecord> records) throws SQLException;
+    void insert(final String tableName, final String insertFunction, final Collection<SinkRecord> records) throws SQLException;
 
 }

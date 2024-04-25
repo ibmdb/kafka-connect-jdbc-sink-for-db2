@@ -51,6 +51,10 @@ public class JDBCSinkConfig extends AbstractConfig {
     private static final String CONFIG_DOCUMENTATION_INSERT_MODE_DATABASELEVEL = "The insertion mode to use (ex: insert, upsert, or update).";
     private static final String CONFIG_DISPLAY_INSERT_MODE_DATABASELEVEL = "Insert mode database level";
 
+    public static final String CONFIG_NAME_INSERT_FUNCTION_VALUE = "insert.function.value";
+    private static final String CONFIG_DOCUMENTATION_INSERT_FUNCTION_VALUE = "The insertion function value to use (ex: jdbc or memory_table).";
+    private static final String CONFIG_DISPLAY_INSERT_FUNCTION_VALUE = "Insert function value";
+
     public static ConfigDef config() {
         ConfigDef config = new ConfigDef();
 
@@ -113,6 +117,16 @@ public class JDBCSinkConfig extends AbstractConfig {
                 6,
                 ConfigDef.Width.MEDIUM,
                 CONFIG_DISPLAY_INSERT_MODE_DATABASELEVEL);
+
+        config.define(CONFIG_NAME_INSERT_FUNCTION_VALUE,
+                ConfigDef.Type.STRING,
+                null, //"jdbc",
+                ConfigDef.Importance.LOW,
+                CONFIG_DOCUMENTATION_INSERT_FUNCTION_VALUE,
+                CONFIG_CONNECTION_GROUP,
+                7,
+                ConfigDef.Width.MEDIUM,
+                CONFIG_DISPLAY_INSERT_FUNCTION_VALUE);
 
         return config;
     }

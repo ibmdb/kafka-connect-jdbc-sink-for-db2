@@ -89,7 +89,7 @@ class JDBCSinkTaskTest {
 
         // Verify the method invocations
         // verify(database.getWriter(), times(1)).insert("mytable", records);
-        verify(task.database.getWriter(), times(1)).insert("schema.mytable", records);
+        verify(task.database.getWriter(), times(1)).insert("schema.mytable", null, records);
     }
 
     @Test

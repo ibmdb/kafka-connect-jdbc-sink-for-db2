@@ -37,7 +37,7 @@ mvn clean package
 cp target/kafka-connect-jdbc-sink-1.0.0-SNAPSHOT-jar-with-dependencies.jar /usr/local/share/java/
 ```
 
-8. Copy the `connect-standalone.properties` and `jdbc-sink.properties` files into the `/usr/local/etc/kafka/` directory.
+8. Copy the `connect-standalone.properties` and `jdbc-sink.properties` files into the `/usr/local/etc/kafka/` directory. Note that for Db2 LUW 11.5.9 or later, one can use `insert.function.value=memory_table` in `jdbc-sink.properties` to insert rows using the SYSPROC.MEMORY_TABLE function instead of an INSERT with the input batch of rows.
 
 ```bash
 cp config/* /usr/local/etc/kafka/

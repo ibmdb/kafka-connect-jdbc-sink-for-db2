@@ -101,11 +101,13 @@ public class JDBCSinkTask extends SinkTask {
                 recordsCount, first.topic(), first.kafkaPartition(), first.kafkaOffset());
 
         final String tableName = config.getString(JDBCSinkConfig.CONFIG_NAME_TABLE_NAME_FORMAT);
+        final String insertFunction = config.getString(JDBCSinkConfig.CONFIG_NAME_INSERT_FUNCTION_VALUE);
+        //final String insertFunction = null;
 
         logger.info("# of records: " + records.size());
         try {
             Instant start = Instant.now();
-            this.database.getWriter().insert(tableName, records);
+            this.database.getWriter().insert(tableName, insertFunction, records);
             logger.info(String.format("%d RECORDS PROCESSED", records.size()));
             Instant finish = Instant.now();
             long timeElapsed = Duration.between(start, finish).toMillis(); // in millis

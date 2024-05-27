@@ -118,7 +118,7 @@ public class JDBCWriterTest {
             JDBCWriter jdbcWriter = new JDBCWriter(dataSource);
 
             // Execute the method under test
-            jdbcWriter.insert(tableName, records);
+            jdbcWriter.insert(tableName, null, records);
             // Verify the behavior
             verify(connection).prepareStatement(insertStatements.get(database));
             verify(preparedStatement).setObject(1, 1);
@@ -202,7 +202,7 @@ public class JDBCWriterTest {
                     .thenReturn(insertPreparedStatement);
 
             // Execute the method under test
-            jdbcWriter.insert(tableName, records);
+            jdbcWriter.insert(tableName, null, records);
             // Verify the behavior
             verify(connection).prepareStatement(createTableStatements.get(database));
             verify(createPreparedStatement).execute();

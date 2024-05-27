@@ -53,6 +53,7 @@ public class CommandBuilder {
         switch (fieldType) {
             case INT8:
             case INT16:
+                return "SMALLINT";
             case INT32:
                 return "INTEGER";
             case INT64:

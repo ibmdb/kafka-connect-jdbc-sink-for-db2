@@ -71,7 +71,7 @@ class JDBCSinkConnectorTest {
     @Test
     void testConfig() {
         ConfigDef configDef = connector.config();
-        assertEquals(6, configDef.configKeys().size());
+        assertEquals(7, configDef.configKeys().size());
     }
 
     @Test
@@ -80,12 +80,13 @@ class JDBCSinkConnectorTest {
         Map<String, String> connConfig = new HashMap<>();
 
         Config taskConfig = connector.validate(connConfig);
-        assertEquals(6, taskConfig.configValues().size());
+        assertEquals(7, taskConfig.configValues().size());
         assertEquals(null, taskConfig.configValues().get(0).value());
         assertEquals(null, taskConfig.configValues().get(1).value());
         assertEquals(null, taskConfig.configValues().get(2).value());
         assertEquals(null, taskConfig.configValues().get(3).value());
-        assertEquals(false, taskConfig.configValues().get(4).value());
-        assertEquals(1, taskConfig.configValues().get(5).value());
+        assertEquals(null, taskConfig.configValues().get(4).value());
+        assertEquals(false, taskConfig.configValues().get(5).value());
+        assertEquals(1, taskConfig.configValues().get(6).value());
     }
 }

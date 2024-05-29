@@ -1,6 +1,8 @@
-# Kafka Connect sink connector for JDBC
+# Kafka Connect sink connector for Db2
 
-kafka-connect-jdbc-sink is a [Kafka Connect](http://kafka.apache.org/documentation.html#connect) sink connector for copying data from Apache Kafka into a JDBC database.
+kafka-connect-jdbc-sink-for-db2 is a [Kafka Connect](http://kafka.apache.org/documentation.html#connect) sink connector for copying data from Apache Kafka into a Db2 Database. This is based on the generic connector for JDBC databases.
+
+The main difference with the generic JDBC connector is that this allows the user to exploit the new MEMORY_TABLE table function to batch rows into Db2 and achieve significantly larger ingest speeds than with the generic insert mechanism. This can be enabled as part of the connection configuration using the new `insert.function.value=memory_table` property.
 
 The connector is supplied as source code which you can easily build into a JAR file.
 
@@ -37,7 +39,10 @@ mvn clean package
 cp target/kafka-connect-jdbc-sink-1.0.0-SNAPSHOT-jar-with-dependencies.jar /usr/local/share/java/
 ```
 
-8. Copy the `connect-standalone.properties` and `jdbc-sink.properties` files into the `/usr/local/etc/kafka/` directory. Note that for Db2 LUW 11.5.9 or later, one can use `insert.function.value=memory_table` in `jdbc-sink.properties` to insert rows using the SYSPROC.MEMORY_TABLE function instead of an INSERT with the input batch of rows.
+8. Copy the `connect-standalone.properties` and `jdbc-sink.properties` files into the `/usr/local/etc/kafka/` directory.
+
+Note that for Db2 LUW 11.5.9 or later, one can use `insert.function.value=memory_table` in `jdbc-sink.properties` to insert rows using the SYSPROC.MEMORY_TABLE function instead of an INSERT with the input batch of rows. Also, setting the value.converter.schemas.enabled=true will allow valueSchema in the writer code to get the schema needed fro Db2 insert and create table. Additionally, if you want to change the connector batch size, one can set the Kafka Connect property to enable connector.client.config.override.policy=All and the connector needs to use settings: batch.size: <value>, and consumer.override.max.poll.records: <value>.
+
 
 ```bash
 cp config/* /usr/local/etc/kafka/
